@@ -12,7 +12,7 @@ export class DurationService {
         let days = duration / (UNITS.DAY);
         let hours = (duration % (UNITS.DAY)) / UNITS.HOUR;
         let minutes = ((duration % (UNITS.DAY)) % UNITS.HOUR) / UNITS.MINUTE_SECOND;
-        let seconds = (((duration % (UNITS.DAY)) % UNITS.HOUR) % UNITS.MINUTE_SECOND) / UNITS.MINUTE_SECOND;
+        let seconds = (((duration % (UNITS.DAY)) % UNITS.HOUR) % UNITS.MINUTE_SECOND);
         return {
           days: Math.floor(days),
           hours: Math.floor(hours),
