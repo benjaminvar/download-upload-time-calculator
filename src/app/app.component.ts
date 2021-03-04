@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {       
-  title = 'Download/Upload Time calculator';
   sizeOptions = [
     {
       unit: "KB",
@@ -46,7 +46,10 @@ export class AppComponent {
   ];
   result = "";
   calculatorForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    public languageService: LanguageService,
+    private fb: FormBuilder
+    ) {
     const defaultSizeUnitOption = this.sizeOptions[0];
     const defaultSpeedUnitOption = this.speedOptions[0];
     this.calculatorForm = this.fb.group({
@@ -55,6 +58,9 @@ export class AppComponent {
       "speed": [""],
       "speedUnit": [defaultSpeedUnitOption]
     });
+  }
+  ngOnInit() {
+    this.languageService.loadConfig();
   }
   isFormEmpty() {
     const { size, speed } = this.calculatorForm.value;

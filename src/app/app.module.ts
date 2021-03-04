@@ -11,10 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LanguageSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,9 @@ import { NgxMaskModule } from 'ngx-mask';
     MatButtonModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en'
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]

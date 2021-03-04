@@ -1,5 +1,6 @@
-<mat-toolbar color="primary">
-  <span>{{title}}</span>
+<mat-toolbar class="custom-mat-toolbar" color="primary">
+  <span>{{"TITLE" | translate}}</span>
+  <app-language-selector class="ml-auto"></app-language-selector>
 </mat-toolbar>
 <div class="container mt-5">
   <div class="row justify-content-center">
@@ -10,7 +11,7 @@
             <div class="row">
               <div class="col-sm-8">
                 <mat-form-field class="mat-form-fluid">
-                  <mat-label>Download size</mat-label>
+                  <mat-label>{{"SIZE" | translate}}</mat-label>
                   <input matInput type="text" formControlName="size" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
 
@@ -28,7 +29,7 @@
             <div class="row">
               <div class="col-sm-8">
                 <mat-form-field class="mat-form-fluid">
-                  <mat-label>Download Speed</mat-label>
+                  <mat-label>{{"SPEED" | translate}}</mat-label>
                   <input matInput type="text" formControlName="speed" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
               </div>
@@ -44,7 +45,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-               <button mat-raised-button color="primary" (click)="calculateTime()" [disabled]="isFormEmpty()">Calculate</button>
+               <button mat-raised-button color="primary" (click)="calculateTime()" [disabled]="isFormEmpty()">{{"CALCULATE" | translate}}</button>
               </div>
              
             </div>
@@ -54,7 +55,7 @@
       </div>
      <div class="row mt-5">
        <div class="col-sm-12">
-         Result: {{result}}
+       {{"ESTIMATED_TIME" | translate}}: {{result}}
        </div>
      </div>
     </div>
