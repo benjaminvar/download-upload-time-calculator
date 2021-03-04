@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DurationService } from './services/duration.service';
 import { LanguageService } from './services/language.service';
 
 @Component({
@@ -47,7 +48,8 @@ export class AppComponent {
   result = "";
   calculatorForm: FormGroup;
   constructor(
-    public languageService: LanguageService,
+    private durationService: DurationService,
+    private languageService: LanguageService,
     private fb: FormBuilder
     ) {
     const defaultSizeUnitOption = this.sizeOptions[0];
@@ -69,34 +71,8 @@ export class AppComponent {
   calculateTime() {
     const { size, sizeUnit, speed, speedUnit } = this.calculatorForm.value;
     const time = (parseFloat(size) * sizeUnit.multiplier) / (parseFloat(speed) * speedUnit.multiplier / 8);
-    const duration = this.getDuration(time);
-    const formattedDuration = this.formatDuration(duration);
+    const duration = this.durationService.getDuration(time);
+    const formattedDuration = this.durationService.formatDuration(duration);
     this.result = formattedDuration;
-  }
-  getDuration(duration: number) {
-    let days = duration / (3600 * 24);
-    let hours = (duration % (3600 * 24)) / 3600;
-    let minutes = ((duration % (3600 * 24)) % 3600) / 60;
-    let seconds = (((duration % (3600 * 24)) % 3600) % 60) / 60;
-    return {
-      days: Math.floor(days),
-      hours: Math.floor(hours),
-      minutes: Math.floor(minutes),
-      seconds: Math.floor(seconds)
-    }
-  }
-  formatDuration(duration: {days: number, hours: number, minutes: number, seconds: number}) {
-    let str = "";
-    if(duration.days > 0) {
-      str += duration.days + " d ";
-    }
-    if(duration.hours > 0) {
-      str += duration.hours + " h ";
-    }
-    if(duration.minutes > 0) {
-      str += duration.minutes + " m ";
-    }
-    str += duration.seconds + " s ";
-    return str;
   }
 }
