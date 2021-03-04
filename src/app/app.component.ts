@@ -1,46 +1,46 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent {       
   title = 'Download/Upload Time calculator';
   sizeOptions = [
     {
-      unit: "KiB",
-      multiplier: Math.pow(2, 10)
+      unit: "KB",
+      multiplier: 10E3
     },
     {
-      unit: "MiB",
-      multiplier: Math.pow(2, 20)
+      unit: "MB",
+      multiplier: 10E6
     },
     {
-      unit: "GiB",
-      multiplier: Math.pow(2, 30)
+      unit: "GB",
+      multiplier: 10E9
     },
     {
-      unit: "TiB",
-      multiplier: Math.pow(2, 40)
+      unit: "TB",
+      multiplier: 10E12
     }
   ];
   speedOptions = [
     {
-      unit: "Kbit/s",
+      unit: "Kbps",
       multiplier: 10E3
     },
     {
-      unit: "Mbit/s",
+      unit: "Mbps",
       multiplier: 10E6
     },
     {
-      unit: "Gbit/s",
+      unit: "Gbps",
       multiplier: 10E9
     },
     {
-      unit: "Tbit/s",
+      unit: "Tbps",
       multiplier: 10E12
     }
   ];
@@ -56,9 +56,6 @@ export class AppComponent {
       "speedUnit": [defaultSpeedUnitOption]
     });
   }
-  ngOnInit() {
-
-  }
   isFormEmpty() {
     const { size, speed } = this.calculatorForm.value;
     return size === "" || speed === "";
@@ -66,6 +63,34 @@ export class AppComponent {
   calculateTime() {
     const { size, sizeUnit, speed, speedUnit } = this.calculatorForm.value;
     const time = (parseFloat(size) * sizeUnit.multiplier) / (parseFloat(speed) * speedUnit.multiplier / 8);
-    this.result = time.toFixed(2);
+    const duration = this.getDuration(time);
+    const formattedDuration = this.formatDuration(duration);
+    this.result = formattedDuration;
+  }
+  getDuration(duration: number) {
+    let days = duration / (3600 * 24);
+    let hours = (duration % (3600 * 24)) / 3600;
+    let minutes = ((duration % (3600 * 24)) % 3600) / 60;
+    let seconds = (((duration % (3600 * 24)) % 3600) % 60) / 60;
+    return {
+      days: Math.floor(days),
+      hours: Math.floor(hours),
+      minutes: Math.floor(minutes),
+      seconds: Math.floor(seconds)
+    }
+  }
+  formatDuration(duration: {days: number, hours: number, minutes: number, seconds: number}) {
+    let str = "";
+    if(duration.days > 0) {
+      str += duration.days + " d ";
+    }
+    if(duration.hours > 0) {
+      str += duration.hours + " h ";
+    }
+    if(duration.minutes > 0) {
+      str += duration.minutes + " m ";
+    }
+    str += duration.seconds + " s ";
+    return str;
   }
 }
