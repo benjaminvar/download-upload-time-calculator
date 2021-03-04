@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field class="full-width">
     <mat-select placeholder="{{'LANGUAGE' | translate}}" [formControl]="languageControl">
       <mat-option *ngFor="let language of availableLanguages" [value]="language.code">{{language.text}}</mat-option>
     </mat-select>

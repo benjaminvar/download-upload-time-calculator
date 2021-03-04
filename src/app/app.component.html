@@ -1,6 +1,17 @@
 <mat-toolbar class="custom-mat-toolbar" color="primary">
-  <span>{{"TITLE" | translate}}</span>
-  <app-language-selector class="ml-auto"></app-language-selector>
+  <div class="container-fluid full-width">
+    <div class="row align-items-center">
+      <div class="col-sm-12 col-lg-auto">
+        <span>{{"TITLE" | translate}}</span>
+      </div>
+      <div class="col-sm-12 col-lg-auto ml-auto">
+        <app-language-selector class="ml-auto"></app-language-selector>
+     
+      </div>
+    </div>
+  </div>
+ 
+  
 </mat-toolbar>
 <div class="container mt-5">
   <div class="row justify-content-center">
@@ -10,15 +21,15 @@
           <form [formGroup]="calculatorForm">
             <div class="row">
               <div class="col-sm-8">
-                <mat-form-field class="mat-form-fluid">
+                <mat-form-field class="full-width">
                   <mat-label>{{"SIZE" | translate}}</mat-label>
                   <input matInput type="text" formControlName="size" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
 
               </div>
              <div class="col-sm-4">
-               <mat-form-field class="mat-form-fluid">
-                <mat-select formControlName="sizeUnit">
+               <mat-form-field class="full-width">
+                <mat-select placeholder="{{'UNIT' | translate}}" formControlName="sizeUnit">
                   <mat-option *ngFor="let sizeOption of sizeOptions" [value]="sizeOption">
                     {{sizeOption.unit}}
                   </mat-option>
@@ -28,14 +39,14 @@
             </div>
             <div class="row">
               <div class="col-sm-8">
-                <mat-form-field class="mat-form-fluid">
+                <mat-form-field class="full-width">
                   <mat-label>{{"SPEED" | translate}}</mat-label>
                   <input matInput type="text" formControlName="speed" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
               </div>
               <div class="col-sm-4">
-                <mat-form-field class="mat-form-fluid">
-                  <mat-select formControlName="speedUnit">
+                <mat-form-field class="full-width">
+                  <mat-select  placeholder="{{'UNIT' | translate}}" formControlName="speedUnit">
                     <mat-option *ngFor="let speedOption of speedOptions" [value]="speedOption">
                       {{speedOption.unit}}
                     </mat-option>
@@ -53,7 +64,7 @@
            
         </div>
       </div>
-     <div class="row mt-5">
+     <div class="row my-5">
        <div class="col-sm-12">
        {{"ESTIMATED_TIME" | translate}}: {{result}}
        </div>
