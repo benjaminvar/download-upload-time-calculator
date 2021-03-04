@@ -11,7 +11,7 @@
               <div class="col-sm-8">
                 <mat-form-field class="mat-form-fluid">
                   <mat-label>Download size</mat-label>
-                  <input matInput type="text" formControlName="size"/>
+                  <input matInput type="text" formControlName="size" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
 
               </div>
@@ -29,7 +29,7 @@
               <div class="col-sm-8">
                 <mat-form-field class="mat-form-fluid">
                   <mat-label>Download Speed</mat-label>
-                  <input matInput type="text" formControlName="speed"/>
+                  <input matInput type="text" formControlName="speed" mask="separator.2" separatorLimit="1000" thousandSeparator=","/>
                 </mat-form-field>
               </div>
               <div class="col-sm-4">
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-               <button mat-raised-button color="primary" (click)="calculateTime()">Calculate</button>
+               <button mat-raised-button color="primary" (click)="calculateTime()" [disabled]="isFormEmpty()">Calculate</button>
               </div>
              
             </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -50,14 +50,18 @@ export class AppComponent {
     const defaultSizeUnitOption = this.sizeOptions[0];
     const defaultSpeedUnitOption = this.speedOptions[0];
     this.calculatorForm = this.fb.group({
-      "size": [],
+      "size": [""],
       "sizeUnit": [defaultSizeUnitOption],
-      "speed": [],
+      "speed": [""],
       "speedUnit": [defaultSpeedUnitOption]
     });
   }
   ngOnInit() {
 
+  }
+  isFormEmpty() {
+    const { size, speed } = this.calculatorForm.value;
+    return size === "" || speed === "";
   }
   calculateTime() {
     const { size, sizeUnit, speed, speedUnit } = this.calculatorForm.value;
