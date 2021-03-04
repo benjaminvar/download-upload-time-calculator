@@ -1,14 +1,18 @@
 import { Injectable } from "@angular/core";
-
+export const UNITS = {
+  DAY: 3600 * 24,
+  HOUR: 3600,
+  MINUTE_SECOND: 60
+}
 @Injectable({
     'providedIn': "root"
 })
 export class DurationService {
     getDuration(duration: number) {
-        let days = duration / (3600 * 24);
-        let hours = (duration % (3600 * 24)) / 3600;
-        let minutes = ((duration % (3600 * 24)) % 3600) / 60;
-        let seconds = (((duration % (3600 * 24)) % 3600) % 60) / 60;
+        let days = duration / (UNITS.DAY);
+        let hours = (duration % (UNITS.DAY)) / UNITS.HOUR;
+        let minutes = ((duration % (UNITS.DAY)) % UNITS.HOUR) / UNITS.MINUTE_SECOND;
+        let seconds = (((duration % (UNITS.DAY)) % UNITS.HOUR) % UNITS.MINUTE_SECOND) / UNITS.MINUTE_SECOND;
         return {
           days: Math.floor(days),
           hours: Math.floor(hours),
