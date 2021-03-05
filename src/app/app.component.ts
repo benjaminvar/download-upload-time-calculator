@@ -66,7 +66,7 @@ export class AppComponent {
   }
   isFormEmpty() {
     const { size, speed } = this.calculatorForm.value;
-    return size === "" || speed === "";
+    return size === "" || speed === "" || speed === "0";
   }
   calculateTime() {
     const { size, sizeUnit, speed, speedUnit } = this.calculatorForm.value;
